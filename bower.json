@@ -1,0 +1,21 @@
+{
+  "name": "ngOdin",
+  "version": "0.0.0",
+  "authors": [
+    "Vivi Jiang <vivi.jiang@ef.com>"
+  ],
+  "description": "angularJS usage in Odin",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~1.11.1",
+    "ng-grid": "https://github.com/angular-ui/ng-grid.git#~2.0.12",
+    "bootstrap": "~3.2.0"
+  }
+}

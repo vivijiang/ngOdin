@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Customize ng-Grid</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/site.css" />
+    <script src="/javascripts/lib.js"></script>
+</head>
+
+<body ng-app="GridDemo">
+    <div class="container" ng-controller="GridDemoController">
+        <h1>Odin - Grid</h1>
+        {{hello}}
+        <br/>
+        <my-customer info="igor"></my-customer>
+        <odin-grid odin-grid-options="customGrid"></odin-grid>
+
+    </div>
+
+    <script src="/javascripts/ngodin.js"></script>
+    <script src="/javascripts/main.js"></script>
+</body>
+
+</html>
