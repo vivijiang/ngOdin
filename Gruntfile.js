@@ -42,7 +42,8 @@ module.exports = function(grunt) {
           // 'bower_components/jquery/dist/jquery.min.js',
           // 'bower_components/angular/angular.min.js',
           'bower_components/bootstrap/dist/css/bootstrap.min.css',
-          'bower_components/ng-grid/ng-grid.min.css'
+          'bower_components/ng-grid/ng-grid.min.css'//,
+           // 'private/stylesheets/grid.css'
         ],
         dest: 'dist/site.css',
       }

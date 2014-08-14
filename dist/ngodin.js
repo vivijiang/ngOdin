@@ -30,27 +30,11 @@ angular.module('ng.odin.grid', [
             return {
                 restrict: 'E',
                 scope: {
-                    odinGridOptions: '=odinGridOptions',
-
+                    odinGridOptions: '=odinGridOptions'
                 },
                 controller: function($scope, $element) {
-                    // $scope.ngGridOptions = $scope.odinGridOptions;
-                    // 
-                   
                     // build ng-grid options
-                    var columnDefs = [{
-                        field: 'Name',
-                        displayName: 'Offer Name',
-                        //sortFn: getServerSortedData
-                    }, {
-                        field: 'OfferPrice',
-                        displayName: 'Offer Price',
-                        // sortable: false
-                    }, {
-                        field: 'Description',
-                        displayName: 'Description',
-                        // sortable: false
-                    }];
+
                     $scope.totalServerItems = 0;
                     $scope.pagingOptions = {
                         pageSize: $scope.odinGridOptions.pageSize,
@@ -71,7 +55,7 @@ angular.module('ng.odin.grid', [
                                 size: pageSize
                             };
 
-                            // data.orderBy = $scope.sortInfo.fields[0] + '-' + $scope.sortInfo.directions[0];
+                            data.orderBy = $scope.odinGridOptions.sortInfo.fields[0] + '-' + $scope.odinGridOptions.sortInfo.directions[0];
 
                             $http.post($scope.odinGridOptions.dataSourceUrl, data)
                                 .success(function(largeLoad) {
@@ -88,37 +72,32 @@ angular.module('ng.odin.grid', [
                         }
                     }, true);
 
-                    $scope.sortInfo = {
-                        fields: ['Name'],
-                        directions: ['asc' || 'desc']
-                    };
-                    // $scope.$watch('ngGridOptions.ngGrid.config.sortInfo', function(newVal, oldVal, scope) {
-                    //     $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
-                    // }, true);
+
+                    $scope.$watch('ngGridOptions.ngGrid.config.sortInfo', function(newVal, oldVal, scope) {
+                        $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+                    }, true);
+
                     $scope.ngGridOptions = {
                         data: 'myData',
                         selectedItems: [],
-                        columnDefs: columnDefs,
+                        columnDefs: $scope.odinGridOptions.columnDefs,
                         enablePaging: true,
                         showFooter: true,
                         multiSelect: true, // select multiple grid lines
                         totalServerItems: 'totalServerItems',
                         pagingOptions: $scope.pagingOptions,
 
-
                         // apply sort when data has been loaded
-                        // sortInfo: $scope.sortInfo,
-                        //sortInfo: { fields: ['Name'], directions: ['asc' || 'desc'] },
-                        // useExternalSorting: true,
-                        //enableSorting: true,
-
-                        // showSelectionCheckbox: true
+                        sortInfo: $scope.odinGridOptions.sortInfo,
+                        useExternalSorting: $scope.odinGridOptions.useExternalSorting,
+                        enableSorting: $scope.odinGridOptions.enableSorting,
+                        showSelectionCheckbox: $scope.odinGridOptions.showSelectionCheckbox
 
                         // filterOptions: $scope.filterOptions
                     };
                    
                 },
-                // template: '<span>{{ngGridOptions}}</span>'
+
                 template: '<div class="hide-countpicker" style="height:{{odinGridOptions.height}};width:{{odinGridOptions.width}}" ng-grid="ngGridOptions"></div>'
 
             };
