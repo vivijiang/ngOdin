@@ -14,14 +14,16 @@ angular.module('GridDemo', ['ng.odin.grid'])
 			showSelectedCount: false,
 			multiSelect: true,
 			showFooter: true,
-			dataSourceUrl:''
+			dataSourceUrl: '/jsonservice/offer-list',
+			pageSize: 5
 		};
 
 
-		$http.post('http://currentodin.ef.com/SalesItemDetail/LoadOfferList?businessNodeKey=OWN-CN', {
-			page: 1,
-			size:10
-		})
+		// $http.post('/json/offer-list.json', {
+		// 	page: 1,
+		// 	size:10
+		// })
+		$http.post('/jsonservice/offer-list')
 			.success(function(largeLoad) {
 				debugger;
 			});
