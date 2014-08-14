@@ -5,21 +5,7 @@
 (function(window, $) {
     var odinGridDirectives = angular.module('ng.odin.grid.directives', ['ngGrid']);
 
-    odinGridDirectives.directive('myCustomer', [
-
-        function() {
-            return {
-                restrict: 'E',
-                scope: {
-                    customer: '=info'
-                },
-                template: 'Name: {{customer.name}} Address: {{customer.address}}'
-            };
-        }
-    ]);
-
     odinGridDirectives.directive('odinGrid', ['$http',
-
         function($http) {
             return {
                 restrict: 'E',
@@ -38,9 +24,11 @@
                         var pagedData = loadedData.data;
                         $scope.myData = pagedData;
                         $scope.totalServerItems = loadedData.total;
-                        if (!$scope.$$phase) {
-                            $scope.$apply();
-                        }
+
+                        // todo: what's this for ?
+                        // if (!$scope.$$phase) {
+                        //     $scope.$apply();
+                        // }
                     };
                     $scope.getPagedDataAsync = function(pageSize, page, orderBy) {
                         setTimeout(function() {

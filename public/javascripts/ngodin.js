@@ -44,9 +44,11 @@ angular.module('ng.odin.grid', [
                         var pagedData = loadedData.data;
                         $scope.myData = pagedData;
                         $scope.totalServerItems = loadedData.total;
-                        if (!$scope.$$phase) {
-                            $scope.$apply();
-                        }
+
+                        // todo: what's this for ?
+                        // if (!$scope.$$phase) {
+                        //     $scope.$apply();
+                        // }
                     };
                     $scope.getPagedDataAsync = function(pageSize, page, orderBy) {
                         setTimeout(function() {
