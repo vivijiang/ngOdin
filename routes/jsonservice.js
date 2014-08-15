@@ -1,79 +1,51 @@
 var express = require('express');
 var router = express.Router();
 
-var offerList = {
-  "data": [
-    {
-      "OfferId": 159,
-      "Name": "1",
-      "Description": "jg",
-      "OfferPrice": ""
-    },
-    {
-      "OfferId": 158,
-      "Name": "fdsfasa2",
-      "Description": "fdsaf",
-      "OfferPrice": ""
-    },
-    {
-      "OfferId": 153,
-      "Name": "test_17961",
-      "Description": "test description",
-      "OfferPrice": ""
-    },
-    {
-      "OfferId": 152,
-      "Name": "test_modifiedDate_5",
-      "Description": "tesafdasdfasdfasdfasdf",
-      "OfferPrice": "20.00"
-    },
-    {
-      "OfferId": 151,
-      "Name": "test_modifieddate_3",
-      "Description": "",
-      "OfferPrice": ""
-    },
-    {
-      "OfferId": 150,
-      "Name": "test_modifeddate_1",
-      "Description": "",
-      "OfferPrice": ""
-    },
-    {
-      "OfferId": 149,
-      "Name": "test_offer_lastmodified",
-      "Description": "test",
-      "OfferPrice": ""
-    },
-    {
-      "OfferId": 148,
-      "Name": "retest1857",
-      "Description": "retest1857",
-      "OfferPrice": ""
-    },
-    {
-      "OfferId": 147,
-      "Name": "test1857",
-      "Description": "just try",
-      "OfferPrice": ""
-    },
-    {
-      "OfferId": 146,
-      "Name": "test-abcdefg",
-      "Description": "testadfasfasdf",
-      "OfferPrice": ""
-    }
-  ],
-  "total": 78
-};
+
+var offerList =[];
+// Retrieve
+var MongoClient = require('mongodb').MongoClient;
+var ngOdinDB;
+// Connect to the db
+MongoClient.connect("mongodb://localhost:27017/ngodindb", function(err, db) {
+    if(err) { return console.dir(err); }
+    ngOdinDB =db;
+});
+
+
 /* GET users listing. */
 router.get('/', function(req, res) {
   res.send('jsonservice root page');
 });
 
 router.post('/offer-list', function(req, res) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(offerList));
+    var reqData = req.body;
+    var pageSize = reqData.size;
+    var pageIndex = reqData.page-1;
+    var orderBy = reqData.orderBy;
+
+    var totalLength =0;
+    for (var property in orderBy)
+    {
+        orderBy[property] === 'asc' ? orderBy[property] = -1: orderBy[property]= 1
+    }
+
+    // get all offerlist
+    ngOdinDB.collection('offerlist', function(err, collection) {
+        // sort by and a value of 1 or -1 to specify an ascending or descending sort respectively.
+        collection.find().toArray(function(err, items){
+            totalLength= items.length;
+        });
+        collection.find().sort(orderBy).skip(pageIndex * pageSize).limit(pageSize).toArray(function(err, items) {
+            offerList = {data:items, total: totalLength};
+        });
+
+
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify(offerList));
+    });
+
+
 });
 
 

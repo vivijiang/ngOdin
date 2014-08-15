@@ -34,10 +34,12 @@
                         setTimeout(function() {
                             var data = {
                                 page: page,
-                                size: pageSize
+                                size: pageSize,
+                                orderBy: {}
                             };
 
-                            data.orderBy = $scope.odinGridOptions.sortInfo.fields[0] + '-' + $scope.odinGridOptions.sortInfo.directions[0];
+
+                            data.orderBy[$scope.odinGridOptions.sortInfo.fields[0]] = $scope.odinGridOptions.sortInfo.directions[0];
 
                             $http.post($scope.odinGridOptions.dataSourceUrl, data)
                                 .success(function(largeLoad) {

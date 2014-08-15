@@ -11,21 +11,7 @@ angular.module('ng.odin.grid', [
 (function(window, $) {
     var odinGridDirectives = angular.module('ng.odin.grid.directives', ['ngGrid']);
 
-    odinGridDirectives.directive('myCustomer', [
-
-        function() {
-            return {
-                restrict: 'E',
-                scope: {
-                    customer: '=info'
-                },
-                template: 'Name: {{customer.name}} Address: {{customer.address}}'
-            };
-        }
-    ]);
-
     odinGridDirectives.directive('odinGrid', ['$http',
-
         function($http) {
             return {
                 restrict: 'E',
@@ -54,10 +40,12 @@ angular.module('ng.odin.grid', [
                         setTimeout(function() {
                             var data = {
                                 page: page,
-                                size: pageSize
+                                size: pageSize,
+                                orderBy: {}
                             };
 
-                            data.orderBy = $scope.odinGridOptions.sortInfo.fields[0] + '-' + $scope.odinGridOptions.sortInfo.directions[0];
+
+                            data.orderBy[$scope.odinGridOptions.sortInfo.fields[0]] = $scope.odinGridOptions.sortInfo.directions[0];
 
                             $http.post($scope.odinGridOptions.dataSourceUrl, data)
                                 .success(function(largeLoad) {
