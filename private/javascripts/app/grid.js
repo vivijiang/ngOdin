@@ -4,12 +4,12 @@
 
 'use strict';
 
-angular.module('GridDemo', ['ng.odin.grid'])
+angular.module('GridDemo', ['kendo.directives','ng.odin'])
 	.controller('GridDemoController', function($scope, $http) {
 		$scope.hello = 'hello, this is a demo for grid';
 		
 		$scope.customGrid = {
-			height: '300px',
+			height: '240px',
 			width: '500px',
 			showSelectedCount: false,
 			showSelectionCheckbox: true,
@@ -23,7 +23,7 @@ angular.module('GridDemo', ['ng.odin.grid'])
 			pageSize: 5,
 			columnDefs: [{
 				field: 'Name',
-				displayName: 'Offer Name',
+				displayName: 'Offer Name'
 				//sortFn: getServerSortedData
 			}, {
 				field: 'OfferPrice',
@@ -35,4 +35,19 @@ angular.module('GridDemo', ['ng.odin.grid'])
 				sortable: false
 			}]
 		};
-	});
+
+
+        $scope.saleItemTypeList = [{
+            text: "Book",
+            value: "1"
+        }, {
+            text: "Course",
+            value: "2"
+        }, {
+            text: "CD",
+            value: "3"
+        }, {
+            text: "iLab",
+            value: "4"
+        }];
+    });

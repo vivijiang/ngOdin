@@ -79,7 +79,7 @@
 
                         // filterOptions: $scope.filterOptions
                     };
-                   
+
                 },
 
                 template: '<div class="hide-countpicker" style="height:{{odinGridOptions.height}};width:{{odinGridOptions.width}}" ng-grid="ngGridOptions"></div>'

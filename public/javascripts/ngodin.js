@@ -85,7 +85,7 @@ angular.module('ng.odin.grid', [
 
                         // filterOptions: $scope.filterOptions
                     };
-                   
+
                 },
 
                 template: '<div class="hide-countpicker" style="height:{{odinGridOptions.height}};width:{{odinGridOptions.width}}" ng-grid="ngGridOptions"></div>'
@@ -96,4 +96,41 @@ angular.module('ng.odin.grid', [
 
 })(window, jQuery);
 angular.module('ng.odin.grid.services', []);
+
+'use strict';
+
+angular.module('ng.odin.kgrid', [
+    'ng.odin.kgrid.services',
+    'ng.odin.kgrid.directives'
+]);
+
+/**
+ * Created by vivi.jiang on 8/11/2014.
+ */
+
+(function(window, $) {
+    var kGridDirectives = angular.module('ng.odin.kgrid.directives',[]);
+
+    kGridDirectives.directive('kGrid', ['$http',
+        function($http) {
+            return {
+                restrict: 'E',
+                scope: {
+                    odinGridOptions: '=odinGridOptions'
+                },
+                controller: function($scope, $element) {
+                    // build kendoUI Grid options
+                    // for ajax coursetypelevel data
+
+
+                },
+
+                template: '<span>test</span>'
+
+            };
+        }
+    ]);
+
+})(window, jQuery);
+
 angular.module('ng.odin', ['ng.odin.grid']);
