@@ -11,7 +11,7 @@ router.get('/grid', function(req, res) {
 });
 
 router.get('/validation', function(req, res) {
-    res.render('demo/validation.html');
+    res.render('demo/validation');
 });
 
 module.exports = router;

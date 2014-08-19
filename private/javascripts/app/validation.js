@@ -8,5 +8,5 @@ angular.module('ValidationDemo', ['ng.odin'])
     .controller('ValidationDemoController', function($scope, $http) {
         $scope.hello = 'hello, this is a demo for validation';
 
-
+        $scope.integer = 5;
     });

@@ -2,9 +2,20 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    meta(charset='utf-8')
+    link(rel='stylesheet', href='/stylesheets/site.css')
+    script(src='/javascripts/lib.js')
+
   body
-      a(href='/demo/grid') grid
-      ||
-      a(href='/demo/validation') validation
-    block content
+      header.navbar.navbar-static-top.navbar-inverse
+        .container
+            ul.nav.navbar-nav
+                li
+                    a(href='/demo/grid') grid
+                li
+                    a(href='/demo/validation') validation
+      .container
+        block content
+      footer
+      script(src='/javascripts/ngodin.js')
+      script(src='/javascripts/main.js')

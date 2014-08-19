@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+
+    div(ng-app='ValidationDemo')
+        .container(ng-controller='ValidationDemoController')
+            h1 Odin - Validation
+            span {{hello}}
+
+        div
+            label integer validation:
+            input(type='text' integer required ng-model="integerModel")
+            span input value is:{{integerModel}}
+
+        div
+             label float validation:
+             input(type='text' smart-float required ng-model="floatModel")
+             span input value is:{{floatModel}}
+
