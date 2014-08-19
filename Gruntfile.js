@@ -44,9 +44,7 @@ module.exports = function(grunt) {
         src: [
           'bower_components/bootstrap/dist/css/bootstrap.min.css',
           'bower_components/ng-grid/ng-grid.min.css',
-            'private/stylesheets/kendo.common.min.css',
-            'private/stylesheets/kendo.bootstrap.min.css',
-           'private/stylesheets/grid.css'
+            'private/stylesheets/**'
         ],
         dest: 'dist/site.css'
       }

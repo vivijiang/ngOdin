@@ -14,8 +14,17 @@
     <h1>Odin - Validation</h1>
     {{hello}}
 
+<div>
+    <label>integer validation:</label>
+    <input integer ng-model="integerModel">
+    <span>input value is: {{integerModel}}</span>
+</div>
 
-
+    <div>
+        <label>float validation:</label>
+        <input smart-float ng-model="floatModel">
+        <span>input value is: {{floatModel}}</span>
+    </div>
 </div>
 
 <script src="/javascripts/ngodin.js"></script>
