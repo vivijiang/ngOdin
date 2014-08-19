@@ -49,4 +49,34 @@ router.post('/offer-list', function(req, res) {
 });
 
 
+router.post('/coursetype', function(req, res) {
+    var reqData = req.body;
+    var pageSize = reqData.size;
+    var pageIndex = reqData.page-1;
+    var orderBy = reqData.orderBy;
+
+    var totalLength =0;
+    for (var property in orderBy)
+    {
+        orderBy[property] === 'asc' ? orderBy[property] = -1: orderBy[property]= 1
+    }
+
+    // get all offerlist
+    ngOdinDB.collection('offerlist', function(err, collection) {
+        // sort by and a value of 1 or -1 to specify an ascending or descending sort respectively.
+        collection.find().toArray(function(err, items){
+            totalLength= items.length;
+        });
+        collection.find().sort(orderBy).skip(pageIndex * pageSize).limit(pageSize).toArray(function(err, items) {
+            offerList = {data:items, total: totalLength};
+        });
+
+
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify(offerList));
+    });
+
+
+});
+
 module.exports = router;

@@ -3,4 +3,5 @@
  */
 angular.module('ng.odin',
     ['ng.odin.grid',
-    'ng.odin.kgrid']);
+    'ng.odin.kgrid',
+     'odin.validation.directives']);

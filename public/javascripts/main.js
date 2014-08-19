@@ -48,3 +48,11 @@ angular.module('GridDemo', ['kendo.directives','ng.odin'])
             value: "4"
         }];
     });
+'use strict';
+
+angular.module('ValidationDemo', ['ng.odin'])
+    .controller('ValidationDemoController', function($scope, $http) {
+        $scope.hello = 'hello, this is a demo for validation';
+
+
+    });
