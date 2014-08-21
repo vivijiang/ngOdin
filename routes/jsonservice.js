@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-
-var offerList =[];
 // Retrieve
 var MongoClient = require('mongodb').MongoClient;
 var ngOdinDB;
@@ -24,28 +22,22 @@ router.post('/offer-list', function(req, res) {
     var pageIndex = reqData.page-1;
     var orderBy = reqData.orderBy;
 
-    var totalLength =0;
     for (var property in orderBy)
     {
         orderBy[property] === 'asc' ? orderBy[property] = -1: orderBy[property]= 1
     }
 
     // get all offerlist
+    var offerList ={};
     ngOdinDB.collection('offerlist', function(err, collection) {
+
         // sort by and a value of 1 or -1 to specify an ascending or descending sort respectively.
-        collection.find().toArray(function(err, items){
-            totalLength= items.length;
-        });
         collection.find().sort(orderBy).skip(pageIndex * pageSize).limit(pageSize).toArray(function(err, items) {
-            offerList = {data:items, total: totalLength};
+            offerList = {data:items, total: collection.count()};
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify(offerList));
         });
-
-
-        res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify(offerList));
     });
-
-
 });
 
 
@@ -55,28 +47,47 @@ router.post('/coursetype', function(req, res) {
     var pageIndex = reqData.page-1;
     var orderBy = reqData.orderBy;
 
-    var totalLength =0;
+
     for (var property in orderBy)
     {
         orderBy[property] === 'asc' ? orderBy[property] = -1: orderBy[property]= 1
     }
 
     // get all offerlist
+    var offerList ={};
     ngOdinDB.collection('offerlist', function(err, collection) {
         // sort by and a value of 1 or -1 to specify an ascending or descending sort respectively.
-        collection.find().toArray(function(err, items){
-            totalLength= items.length;
-        });
+
         collection.find().sort(orderBy).skip(pageIndex * pageSize).limit(pageSize).toArray(function(err, items) {
-            offerList = {data:items, total: totalLength};
+            offerList = {data:items, total: collection.count()};
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify(offerList));
         });
 
 
-        res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify(offerList));
+
     });
 
 
 });
 
+router.post('/offers', function(req, res) {
+    var reqData = req.body;
+    var pageSize = reqData.size ? reqData.size: 5;
+    var pageIndex = 1;//reqData.page-1;
+    var orderBy = reqData.orderBy;
+
+    // get all offers from Datatable "offers"
+    var offers={};
+    ngOdinDB.collection('offersales', function(err, collection) {
+        // sort by and a value of 1 or -1 to specify an ascending or descending sort respectively.
+        collection.find().skip(pageIndex * pageSize).limit(pageSize).toArray(function(err, items) {
+            offers = {data:items, total: collection.count()};
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify(offers));
+        });
+    });
+
+
+});
 module.exports = router;

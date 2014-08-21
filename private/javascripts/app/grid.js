@@ -36,7 +36,6 @@ angular.module('GridDemo', ['kendo.directives','ng.odin'])
 			}]
 		};
 
-
         $scope.saleItemTypeList = [{
             text: "Book",
             value: "1"
@@ -50,4 +49,109 @@ angular.module('GridDemo', ['kendo.directives','ng.odin'])
             text: "iLab",
             value: "4"
         }];
+
+
+        // for kendo grid
+        var crudServiceBaseUrl = "/jsonservice";
+        $scope.clientGridOptions = {
+            sortable: true,
+            selectable: true,
+            dataSource: [
+                { text: "Foo", id: 1 },
+                { text: "Bar", id: 2 },
+                { text: "Baz", id: 3 }
+            ],
+            columns: [
+                { field: "text", title: "Text" }
+            ]
+        };
+
+        var gridDataSource = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: crudServiceBaseUrl + "/offers",
+                    type: "post",
+                    dataType: "json"
+                },
+                update: {
+                    //http://docs.telerik.com/kendo-ui/api/framework/datasource#configuration-transport.update
+                    url: crudServiceBaseUrl + "/Update",
+                    type: "post",
+                    dataType: "json"
+
+                },
+                destroy: {
+                    url: crudServiceBaseUrl + "/Delete",
+                    dataType: "json"
+                },
+                create: { // create will be called when saves newly added items
+                    //http://docs.telerik.com/kendo-ui/api/framework/datasource#configuration-transport.read
+                    url: crudServiceBaseUrl + "/Create",
+                    type: "post",
+                    dataType: "json"
+                },
+                parameterMap: function (options, operation) {
+                    //set parameters for each request type
+                    if (operation == "read") {
+                        // this is the data for server paging
+                        //options = {
+                        //take: 10
+                        //skip: 10
+                        //page: 2
+                        //    pageSize: 10
+                        //}
+                        console.log(options);
+                        return options;
+                    }
+                    else if (options.models && (operation == "update" || operation == "create")) {
+                        return {
+                            models: kendo.stringify(options.models)
+                        };
+                    }
+                    else if (operation == "destroy" && options.models) {
+                        // send get request like http://localhost:12485/DemoDataApi/OfferSaleItems/Delete?id=1
+                        return {
+                            id: options.models[0].Id
+                        };
+                    }
+                }
+            }//,
+
+//            error: function (xhr, error) {
+//            },
+
+            //serverPaging: true, //http://docs.telerik.com/kendo-ui/api/framework/datasource#configuration-serverPaging
+            //pageSize: 10
+
+        });
+        $scope.gridOptions = {
+            //Setting autoBind to false is useful
+            //when multiple widgets are bound to the same data source.
+            //Disabling automatic binding ensures that the shared data source
+            //doesn't make more than one request to the remote service.
+            //if it's set to false, we need dataSource.read() to fire the "change" event of the dataSource and the widget will be bound
+            //autoBind: false,
+            dataSource: gridDataSource,
+          //  filterable: true, // will show filter for columns except these columns with filterable: false
+           // groupable: true, // for aggregates, default value is false.
+           // selectable: "row",
+           // pageable: true,
+            //height: 400,
+            //toolbar: ["create"], This is for default add new item function
+            columns: [{
+                //filterable: true,
+                groupable: true, //defalut value is true when groupable is true
+                field: "SaleItemType", // defined in schema data
+                width: "150px"
+            }, {
+                //filterable: true, //default value is true if not set it
+                groupable: false,
+                field: "OfferSaleItemName",
+                title: "Sale Item",
+                width: "300px"
+            }]//,
+          //      { command: ["edit", "destroy"], title: " ", width: "200px" }],
+           // editable: "inline" // available options: inline/popup
+        };
+
     });
