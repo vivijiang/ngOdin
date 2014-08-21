@@ -6,14 +6,18 @@ block content
         .container(ng-controller='ValidationDemoController')
             h1 Odin - Validation
             span {{hello}}
+        .form-horizontal
+            div.form-group
+                label.col-sm-2.control-label integer validation
+                .col-sm-4
+                    input.form-control(type='text' integer required ng-model="integerModel")
+                .col-sm-4
+                    span input value is:{{integerModel}}
 
-        div
-            label integer validation:
-            input(type='text' integer required ng-model="integerModel")
-            span input value is:{{integerModel}}
-
-        div
-             label float validation:
-             input(type='text' smart-float required ng-model="floatModel")
-             span input value is:{{floatModel}}
+            div.form-group
+                label.col-sm-2.control-label float validation:
+                .col-sm-4
+                     input.form-control(type='text' smart-float required ng-model="floatModel")
+                .col-sm-4
+                     span input value is:{{floatModel}}
 
