@@ -111,7 +111,7 @@ angular.module('GridDemo', ['kendo.directives','ng.odin'])
                             id: options.models[0].Id
                         };
                     }
-                },
+                }
 
             },
             schema: {

@@ -216,10 +216,6 @@ angular.module('ng.odin.kgrid', [
 //                    toolbarQuery:'=toolbarQuery'
                 },
                 controller: function($scope, $element) {
-
-//                    if(toolbarQuery){
-//                        gridOptions.toolbar=kendo.template($(toolbarQuery).html());
-//                    }
                     var crudServiceBaseUrl = "/jsonservice";
                     var gridDataSource = new kendo.data.DataSource({
                         transport: {
@@ -227,8 +223,6 @@ angular.module('ng.odin.kgrid', [
                                 url: crudServiceBaseUrl + "/offers",
                                 type: "post",
                                 dataType: "json"
-                                // in transport, we can't set callback here
-                                // all callback and error will be set to grid "change" and "error" event
                             },
                             update: {
                                 //http://docs.telerik.com/kendo-ui/api/framework/datasource#configuration-transport.update
@@ -272,31 +266,22 @@ angular.module('ng.odin.kgrid', [
                                     };
                                 }
                             }
-                        },
 
-                        error: function (xhr, error) {
                         },
+                        schema: {
+                            data: function (response) { // build data for grid if the response is not in expected fomat
 
-                        serverPaging: true, //http://docs.telerik.com/kendo-ui/api/framework/datasource#configuration-serverPaging
-                        pageSize: 10//,
-                        //take: 10,
-                        //skip:10,
-                        //page: 2,
-//                        schema: {
-//                            data: function (response) { // build data for grid if the response is not in expected fomat
-//                                var saleItems = $scope.saleItemTypeList;
-//                                var gridData = response.data;
-//                                gridData.forEach(function (saleItem) {
-//                                    var saleItemTypeNameArray = saleItems.filter(function (element) {
-//                                        return element.value === saleItem.SaleItemType;
-//                                    });
-//                                    saleItem.SaleItemTypeName = saleItemTypeNameArray[0].text;
-//                                });
-//                                return gridData;
-//                            },
-//                            total: "total"//,
-//
-//                        }
+                                var gridData = response.data;
+                                return gridData;
+                            },
+                            total: "total"
+                        }
+
+//            error: function (xhr, error) {
+//            },
+
+                        //serverPaging: true, //http://docs.telerik.com/kendo-ui/api/framework/datasource#configuration-serverPaging
+                        //pageSize: 10
 
                     });
                     $scope.gridOptions = {
@@ -307,31 +292,34 @@ angular.module('ng.odin.kgrid', [
                         //if it's set to false, we need dataSource.read() to fire the "change" event of the dataSource and the widget will be bound
                         //autoBind: false,
                         dataSource: gridDataSource,
-                        filterable: true, // will show filter for columns except these columns with filterable: false
-                        groupable: true, // for aggregates, default value is false.
-                        selectable: "row",
-                        pageable: true,
+                        sortable: true,
+                        selectable: true,
+                        //  filterable: true, // will show filter for columns except these columns with filterable: false
+                        // groupable: true, // for aggregates, default value is false.
+                        // selectable: "row",
+                        // pageable: true,
                         //height: 400,
                         //toolbar: ["create"], This is for default add new item function
                         columns: [{
                             //filterable: true,
-                            groupable: true, //defalut value is true when groupable is true
+//                groupable: true, //defalut value is true when groupable is true
                             field: "SaleItemType", // defined in schema data
-                            width: "150px"
+                            width: "150px",
+                            title: "Sale Item Type"
+
                         }, {
                             //filterable: true, //default value is true if not set it
-                            groupable: false,
+//                groupable: false,
                             field: "OfferSaleItemName",
                             title: "Sale Item",
                             width: "300px"
-                        },
-                            { command: ["edit", "destroy"], title: " ", width: "200px" }],
-                        editable: "inline" // available options: inline/popup
+                        }]//,
+                        //      { command: ["edit", "destroy"], title: " ", width: "200px" }],
+                        // editable: "inline" // available options: inline/popup
                     };
 
-
                 },
-                template: '<div kendo-grid k-options="gridOptions" k-rebind="gridOptions.selectable"></div>'
+                template:'<div kendo-grid k-options="gridOptions" k-ng-delay="gridOptions" k-rebind="gridOptions.selectable"></div>'
 
             };
 
