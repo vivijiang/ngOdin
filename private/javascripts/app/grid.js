@@ -53,6 +53,16 @@ angular.module('GridDemo', ['kendo.directives','ng.odin'])
 
         // for kendo grid
         var crudServiceBaseUrl = "/jsonservice";
+        var serverDataUrl={
+            read:'/jsonservice/offers',
+            update:'/jsonservice/update-offers',
+            delete:'/jsonservice/delete-offers',
+            add:'/jsonservice/add-offers'
+        };
+
+        $scope.kGridOptions = {
+            serverDataUrl: serverDataUrl
+        };
         $scope.clientGridOptions = {
             sortable: true,
             selectable: true,

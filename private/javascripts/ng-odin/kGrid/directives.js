@@ -56,34 +56,34 @@
     kGridDirectives.directive('ajaxGrid',['$http',function($http){
 
             return {
-                restrict: 'A',
+                restrict: 'E',
                 scope: {
-//                    koptions: '=odinGridOptions'
+                    odinOptions: '=gridoptions'
 //                    toolbarQuery:'=toolbarQuery'
                 },
                 controller: function($scope, $element) {
-                    var crudServiceBaseUrl = "/jsonservice";
+                    var dataSourceUrls = $scope.odinOptions.serverDataUrl;
                     var gridDataSource = new kendo.data.DataSource({
                         transport: {
                             read: {
-                                url: crudServiceBaseUrl + "/offers",
+                                url: dataSourceUrls.read,
                                 type: "post",
                                 dataType: "json"
                             },
                             update: {
                                 //http://docs.telerik.com/kendo-ui/api/framework/datasource#configuration-transport.update
-                                url: crudServiceBaseUrl + "/Update",
+                                url: dataSourceUrls.update,
                                 type: "post",
                                 dataType: "json"
 
                             },
                             destroy: {
-                                url: crudServiceBaseUrl + "/Delete",
+                                url: dataSourceUrls.delete,
                                 dataType: "json"
                             },
                             create: { // create will be called when saves newly added items
                                 //http://docs.telerik.com/kendo-ui/api/framework/datasource#configuration-transport.read
-                                url: crudServiceBaseUrl + "/Create",
+                                url: dataSourceUrls.add,
                                 type: "post",
                                 dataType: "json"
                             },
