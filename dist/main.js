@@ -111,8 +111,17 @@ angular.module('GridDemo', ['kendo.directives','ng.odin'])
                             id: options.models[0].Id
                         };
                     }
-                }
-            }//,
+                },
+
+            },
+            schema: {
+                data: function (response) { // build data for grid if the response is not in expected fomat
+
+                    var gridData = response.data;
+                    return gridData;
+                },
+                total: "total"
+            }
 
 //            error: function (xhr, error) {
 //            },
@@ -129,6 +138,8 @@ angular.module('GridDemo', ['kendo.directives','ng.odin'])
             //if it's set to false, we need dataSource.read() to fire the "change" event of the dataSource and the widget will be bound
             //autoBind: false,
             dataSource: gridDataSource,
+            sortable: true,
+            selectable: true,
           //  filterable: true, // will show filter for columns except these columns with filterable: false
            // groupable: true, // for aggregates, default value is false.
            // selectable: "row",
@@ -137,12 +148,14 @@ angular.module('GridDemo', ['kendo.directives','ng.odin'])
             //toolbar: ["create"], This is for default add new item function
             columns: [{
                 //filterable: true,
-                groupable: true, //defalut value is true when groupable is true
+//                groupable: true, //defalut value is true when groupable is true
                 field: "SaleItemType", // defined in schema data
-                width: "150px"
+                width: "150px",
+                title: "Sale Item Type"
+
             }, {
                 //filterable: true, //default value is true if not set it
-                groupable: false,
+//                groupable: false,
                 field: "OfferSaleItemName",
                 title: "Sale Item",
                 width: "300px"

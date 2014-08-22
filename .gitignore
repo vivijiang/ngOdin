@@ -158,3 +158,6 @@ $RECYCLE.BIN/
 
 #web storm
 .idea
+
+#mongodb
+db/
