@@ -8,3 +8,8 @@ block content
             h1 Up and running with Angular Direcitives
             span {{hello}}
 
+            uprunning
+
+            ul(ng-repeat="tweet in tweets" say)
+                li(ng-click="sayHello()") {{tweet.author}}
+

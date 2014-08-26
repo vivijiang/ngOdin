@@ -16,29 +16,37 @@ angular.module('ng.uprunning.rundirective', [
 (function(window, $) {
     var runDirectives = angular.module('ng.uprunning.rundirective.directives', []);
 
-    runDirectives.directive('test', ['$http',
+    runDirectives.directive('uprunning', ['$http',
         function($http) {
             return {
                 restrict: 'E',
                 scope: {
-                    options: '=options'
+//                    options: '=options'
                 },
                 controller: function($scope, $element) {
                     // build ng-grid options
 
-                    $scope.totalServerItems = 0;
+//                    $scope.totalServerItems = 0;
 
-                    $scope.$watch('ngGridOptions.ngGrid.config.sortInfo', function(newVal, oldVal, scope) {
-                        $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
-                    }, true);
+//                    $scope.$watch('ngGridOptions.ngGrid.config.sortInfo', function(newVal, oldVal, scope) {
+//                        $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+//                    }, true);
 
 
                 },
 
-                template: '<div> test</div>'
+                template: '<div> This is a test for uprunning HTML tag </div>'
 
             };
         }
     ]);
+
+    runDirectives.directive('say',[function(){
+        return function($scope, $element, $attributes){
+            $scope.sayHello=function(){
+                window.alert($scope.tweet.msg);
+            }
+        }
+    }])
 
 })(window, jQuery);
