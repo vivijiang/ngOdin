@@ -14,4 +14,8 @@ router.get('/validation', function(req, res) {
     res.render('demo/validation');
 });
 
+router.get('/runDirectives', function(req,res){
+    res.render('demo/runDirectives');
+});
+
 module.exports = router;

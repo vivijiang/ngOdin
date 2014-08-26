@@ -177,6 +177,14 @@ angular.module('GridDemo', ['kendo.directives','ng.odin'])
     });
 'use strict';
 
+angular.module('runDirectivesDemo', ['ng.uprunning'])
+    .controller('runDirectivesDemoController', function($scope, $http) {
+        $scope.hello = 'hello, this is a demo for validation';
+
+        $scope.integer = 5;
+    });
+'use strict';
+
 angular.module('ValidationDemo', ['ng.odin'])
     .controller('ValidationDemoController', function($scope, $http) {
         $scope.hello = 'hello, this is a demo for validation';

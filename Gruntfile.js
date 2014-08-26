@@ -34,6 +34,12 @@ module.exports = function(grunt) {
         ],
         dest: 'dist/ngodin.js'
       },
+        uprunning: {
+            src: [
+                'private/javascripts/up-running/**'
+            ],
+            dest: 'dist/uprunning.js'
+        },
       sitejs: {
         src: [
           'private/javascripts/app/**'
