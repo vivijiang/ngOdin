@@ -177,7 +177,7 @@ angular.module('GridDemo', ['kendo.directives','ng.odin'])
     });
 'use strict';
 
-angular.module('runDirectivesDemo', ['ng.uprunning'])
+angular.module('runDirectivesDemo', ['ng.uprunning','kendo.directives'])
     .controller('runDirectivesDemoController', function($scope, $http) {
         $scope.hello = 'hello, this is a demo for up&running with directives';
 
@@ -191,6 +191,66 @@ angular.module('runDirectivesDemo', ['ng.uprunning'])
                 msg:'this is a test for nancy item'
             }
         ];
+
+        $scope.countryNames = [
+            "Albania",
+            "Andorra",
+            "Armenia",
+            "Austria",
+            "Azerbaijan",
+            "Belarus",
+            "Belgium",
+            "Bosnia & Herzegovina",
+            "Bulgaria",
+            "Croatia",
+            "Cyprus",
+            "Czech Republic",
+            "Denmark",
+            "Estonia",
+            "Finland",
+            "France",
+            "Georgia",
+            "Germany",
+            "Greece",
+            "Hungary",
+            "Iceland",
+            "Ireland",
+            "Italy",
+            "Kosovo",
+            "Latvia",
+            "Liechtenstein",
+            "Lithuania",
+            "Luxembourg",
+            "Macedonia",
+            "Malta",
+            "Moldova",
+            "Monaco",
+            "Montenegro",
+            "Netherlands",
+            "Norway",
+            "Poland",
+            "Portugal",
+            "Romania",
+            "Russia",
+            "San Marino",
+            "Serbia",
+            "Slovakia",
+            "Slovenia",
+            "Spain",
+            "Sweden",
+            "Switzerland",
+            "Turkey",
+            "Ukraine",
+            "United Kingdom",
+            "Vatican City"
+        ];
+
+        $scope.colors=[
+            'red',
+            'green',
+            'gray',
+            'blue'
+        ]
     });
 'use strict';
 

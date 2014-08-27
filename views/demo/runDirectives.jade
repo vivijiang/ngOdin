@@ -10,6 +10,20 @@ block content
 
             uprunning
 
-            ul(ng-repeat="tweet in tweets" say)
-                li(ng-click="sayHello()") {{tweet.author}}
+            ul(ng-repeat="tweet in tweets" small-star)
+                li
+                    span(ng-click="sayHello()") {{tweet.author}}
+                    span(ng-click="dance()") dance inner loop
 
+            div(small-star)
+                span(ng-click="dance()") dance test in inner span
+
+            div(small-star ng-click="dance()") dance test in same level div
+
+            h2 kendoUI-angularJS
+            input(kendo-auto-complete ng-model="country" k-data-source="countryNames")
+            p Your selection: {{ country }}
+
+            h2 self-defined kendoUI auto complete
+            input(auto-complete-input ng-model="color" odin-data-source="colors")
+            p self defined - selection: {{ color }}
