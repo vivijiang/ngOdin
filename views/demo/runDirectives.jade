@@ -27,3 +27,13 @@ block content
             h2 self-defined kendoUI auto complete
             input(auto-complete-input ng-model="color" odin-data-source="colors")
             p self defined - selection: {{ color }}
+
+
+            h2 what's transclude?
+            hello-transclude
+                div This is a demo to explain what's transclude.
+                    span this is an inner span
+
+            h2 expander
+            expender(odin-title="expanderTitle")
+                div This is the content for expender

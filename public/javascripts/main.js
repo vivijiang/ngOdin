@@ -250,7 +250,9 @@ angular.module('runDirectivesDemo', ['ng.uprunning','kendo.directives'])
             'green',
             'gray',
             'blue'
-        ]
+        ];
+
+        $scope.expanderTitle = 'What a wonderful day!';
     });
 'use strict';
 

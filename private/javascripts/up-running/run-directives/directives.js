@@ -61,11 +61,16 @@
             };
 
         }
-    }])
+    }]);
 
     runDirectives.directive('autoCompleteInput',[function(){
         return {
-            require : 'ngModel',
+            require : 'ngModel', // we need access the properties and functions defined in ngModel's controller
+//            If you need access to multiple controllers, you can also pass in an array to the
+//                require property, and likewise the fourth parameter of your link function will be
+//            an array of those controllers.
+
+
 
             // can I get the datasource if I don't use scope? Yes, but the name is colors
             // if set scope then it will set up its own scope so that we can't access the original scope (block inherit)
@@ -76,6 +81,13 @@
 //                $scope.odinDataSource
 //            },
             link: function($scope,$element,$attrs,ngModel){
+                // what's $render (data -> view ) ? and what's $setViewValue (view -> data) ? and what' $viewValue ?
+//                The ngModel directive calls $render whenever the value of the data element that it's bound to (data.property in the preceding code) changes.
+//                  Thus, once we assign our custom function
+//                    to the $render key, any time the data changes, we can update the input value
+//                appropriately. $setViewValue works in the opposite direction, so when the user
+//                does something that should change the value, we can tell ngModel what the new
+//                    value is and it will update the internal data model.
                 ngModel.$render = function(){
                     $element.val(ngModel.$viewValue  || '');
                 };
@@ -87,5 +99,42 @@
                 });
             }
         }
-    }])
+    }]);
+
+    runDirectives.directive('helloTransclude',[function(){
+        return{
+            restrict: 'E',
+            template:'<div>Hi there <span ng-transclude></span></div>',
+            transclude: true,
+            replace: true
+        };
+    }]);
+
+    runDirectives.directive('expender',[function(){
+        return{
+            restrict:'E',
+            scope:{
+                title: '=odinTitle' // pay attention to the naming of scope mapping
+            },
+
+            // what's the differences between link and controller defined here ?
+//            http://stackoverflow.com/questions/12546945/difference-between-the-controller-link-and-compile-functions-when-definin
+//            http://stackoverflow.com/questions/15676614/directive-link-vs-compile-vs-controller
+//            controller:function($scope){
+//                $scope.showMe = true;
+//                $scope.toggle = function toggle() {
+//                    $scope.showMe = !$scope.showMe;
+//                };
+//            },
+            template:'<div><div class="title" ng-click="toggle()">{{title}}</div><div class="body" ng-show="showMe" ng-transclude></div></div>',
+            transclude: true,
+            link:function(scope, element, attrs) {
+                scope.showMe = true;
+                scope.toggle = function toggle() {
+                    scope.showMe = !scope.showMe;
+                };
+            }
+        };
+
+    }]);
 })(window, jQuery);
