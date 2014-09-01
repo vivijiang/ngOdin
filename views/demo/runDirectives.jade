@@ -7,7 +7,7 @@ block content
         .container(ng-controller='runDirectivesDemoController')
             h1 Up and running with Angular Direcitives
             span {{hello}}
-
+            input(type="text" ng-model="hello")
             uprunning
 
             ul(ng-repeat="tweet in tweets" small-star)
@@ -37,3 +37,6 @@ block content
             h2 expander
             expender(odin-title="expanderTitle")
                 div This is the content for expender
+
+            h2 Do it yourself!
+            input(type="text" ng-model="hello")

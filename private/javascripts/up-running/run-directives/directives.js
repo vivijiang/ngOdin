@@ -28,7 +28,7 @@
                 },
 
                 template: '<div> This is a test for uprunning HTML tag </div>'
-
+                replace:true
             };
         }
     ]);
@@ -80,6 +80,7 @@
 //            controller:function($scope, $element){
 //                $scope.odinDataSource
 //            },
+//            compile
             link: function($scope,$element,$attrs,ngModel){
                 // what's $render (data -> view ) ? and what's $setViewValue (view -> data) ? and what' $viewValue ?
 //                The ngModel directive calls $render whenever the value of the data element that it's bound to (data.property in the preceding code) changes.

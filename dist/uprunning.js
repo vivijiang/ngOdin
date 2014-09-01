@@ -124,6 +124,10 @@ angular.module('ng.uprunning.rundirective', [
             scope:{
                 title: '=odinTitle' // pay attention to the naming of scope mapping
             },
+
+            // what's the differences between link and controller defined here ?
+//            http://stackoverflow.com/questions/12546945/difference-between-the-controller-link-and-compile-functions-when-definin
+//            http://stackoverflow.com/questions/15676614/directive-link-vs-compile-vs-controller
 //            controller:function($scope){
 //                $scope.showMe = true;
 //                $scope.toggle = function toggle() {
